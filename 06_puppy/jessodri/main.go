@@ -19,11 +19,9 @@ type Storer interface {
 }
 
 // MapStore - Write a `MapStore` implementation of `Storer` backed by a `map`
-type MapStore map[string]*Puppy
+type MapStore map[string]Puppy
 
-// SyncStore - Write a `SyncStore` implementation of `Storer` backed by a [sync.Map](https://golang.org/pkg/sync/#Map)
-type SyncStore *sync.Map
-
+// CreatePuppy creates a new puppy
 func (m MapStore) CreatePuppy(p Puppy) *Puppy {
 
 	return &Puppy{}
@@ -42,6 +40,29 @@ func (m MapStore) DeletePuppy(id string) {
 
 }
 
+// SyncStore - Write a `SyncStore` implementation of `Storer` backed by a [sync.Map](https://golang.org/pkg/sync/#Map)
+type SyncStore struct {
+	store *sync.Map
+}
+
+// CreatePuppy creates a new puppy
+func (s *SyncStore) CreatePuppy(p Puppy) *Puppy {
+
+	return &Puppy{}
+}
+
+func (s SyncStore) ReadPuppy(id string) *Puppy {
+
+	return &Puppy{}
+}
+
+func (s SyncStore) UpdatePuppy(id string) {
+
+}
+
+func (s SyncStore) DeletePuppy(id string) {
+
+}
 
 func main() {
 
